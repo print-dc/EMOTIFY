@@ -27,3 +27,6 @@ logs/
 venv/
 .venv/
 .env
+
+# Ignore local Streamlit secrets
+.streamlit/secrets.toml

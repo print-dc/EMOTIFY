@@ -9,8 +9,9 @@ The model classifies a person's emotion into one of **seven categories** (angry,
 ## Features
 
 - **Emotion Detection**: Classifies facial expressions into seven emotions.
-- **Action Prediction**: Uses mapped datasets to predict potential actions based on detected emotions.
-- **Live Video Processing**: Real-time emotion and action recognition using webcam feed.
+- **Pose-Based Action Recognition**: Detects actions such as hands raised, celebrating, leaning, thinking/face touch, and hands on hips from pose landmarks.
+- **Live Browser Webcam Processing**: Runs as a Streamlit web app with browser camera access.
+- **Fallback Image Upload Mode**: Lets users test a single image without opening the webcam.
 - **Deep Learning Model Optimization**: Improved accuracy through dataset enhancements and hyperparameter tuning.
 
 ## Dependencies
@@ -40,7 +41,15 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-To launch the webcam demo with the included `src/model.h5` file:
+To launch the deployable web app locally:
+
+```bash
+streamlit run app.py
+```
+
+Then open the local URL in your browser, click `START`, and allow camera access when prompted.
+
+To launch the older desktop OpenCV demo with the included `src/model.h5` file:
 
 ```bash
 cd src
@@ -74,6 +83,24 @@ Emotify/
 
 ```
 ## Basic Usage
+
+### Web App
+
+Run the Streamlit app:
+
+```bash
+streamlit run app.py
+```
+
+The deployed or local app can:
+
+- request browser camera permission
+- stream webcam frames over WebRTC
+- detect facial emotion live
+- estimate pose landmarks and infer actions in real time
+- fall back to image upload when webcam access is unavailable
+
+### Desktop Script
 
 The repository is currently compatible with `tensorflow-2.0` and makes use of the Keras API using the `tensorflow.keras` library.
 
@@ -163,3 +190,21 @@ git branch -M main
 git remote add origin https://github.com/<your-username>/<your-repo-name>.git
 git push -u origin main
 ```
+
+## Deploy a Shareable Link
+
+The fastest way to turn this into a link you can share is Streamlit Community Cloud.
+
+1. Push this repository to GitHub.
+2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/).
+3. Create a new app from this repository.
+4. Set the entrypoint file to `app.py`.
+5. Deploy.
+
+After the first deploy, future pushes to GitHub will automatically update the hosted app.
+
+Important notes:
+
+- browser camera access requires `https`
+- users still have to click allow when the browser asks for camera permission
+- the action layer in this app is pose-based heuristic recognition, not a separately trained action-classification model
