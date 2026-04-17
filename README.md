@@ -28,6 +28,27 @@ To install all dependencies, run:
 pip install -r requirements.txt
 ```
 
+## Run Locally on Windows
+
+Use a virtual environment so the project dependencies stay isolated:
+
+```bash
+cd emotify
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+To launch the webcam demo with the included `src/model.h5` file:
+
+```bash
+cd src
+python emotions.py --mode display
+```
+
+Press `q` to close the camera window.
+
 ## Directory Structure
 ```bash
 Emotify/
@@ -79,6 +100,8 @@ cd src
 python emotions.py --mode display
 ```
 
+The webcam demo only needs `src/model.h5` and `src/haarcascade_frontalface_default.xml`. The FER-2013 dataset is only required for training mode.
+
 * This implementation by default detects emotions on all faces in the webcam feed. With a simple 4-layer CNN, the test accuracy reached 63.2% in 50 epochs.
 
 ![Accuracy plot](imgs/accuracy.png)
@@ -114,4 +137,29 @@ If you find any issues or need help, feel free to raise an issue or download the
 
 ```bash
 Let me know if you need any further modifications! 🚀
+```
+## Publish to Your Own GitHub
+
+This folder already contains the original repository's `.git` history and remote.
+
+To publish it to your own GitHub repository while keeping the existing history:
+
+```bash
+git remote remove origin
+git remote add origin https://github.com/<your-username>/<your-repo-name>.git
+git branch -M main
+git push -u origin main
+```
+
+To start fresh with your own commit history instead:
+
+```bash
+git remote remove origin
+Remove-Item -Recurse -Force .git
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/<your-username>/<your-repo-name>.git
+git push -u origin main
 ```
