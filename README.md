@@ -1,104 +1,82 @@
-# Emotion and Action Prediction using Deep Learning
+# 🎭 Emotify — Real-Time Emotion & Action Recognition System
 
-## Introduction
+A real-time AI system that detects human emotions and predicts actions using facial expressions and pose estimation.
 
-This project aims to classify emotions and predict actions based on facial expressions and enviromental analysis using deep convolutional neural networks (CNNs) and machine learning models. The system is trained on the **FER-2013** dataset for emotion detection and the **EMOTIC** and **MPII Human Pose** datasets for action prediction.
+> Built using deep learning (CNN) and computer vision pipelines for live emotion-aware interaction.
 
-The model classifies a person's emotion into one of **seven categories** (angry, disgusted, fearful, happy, neutral, sad, and surprised) and predicts possible actions based on facial expressions and environmental context.
+---
 
-## Features
+## 📸 Demo
 
-- **Emotion Detection**: Classifies facial expressions into seven emotions.
-- **Pose-Based Action Recognition**: Detects actions such as hands raised, celebrating, leaning, thinking/face touch, and hands on hips from pose landmarks.
-- **Live Browser Webcam Processing**: Runs as a Streamlit web app with browser camera access.
-- **Fallback Image Upload Mode**: Lets users test a single image without opening the webcam.
-- **Deep Learning Model Optimization**: Improved accuracy through dataset enhancements and hyperparameter tuning.
+<p align="center">
+  <img src="images/demo.png" alt="Emotify Demo" width="700"/>
+</p>
 
-## Dependencies
+---
 
-* Python 3
-* [OpenCV](https://opencv.org/)
-* [TensorFlow](https://www.tensorflow.org/)
-* [NumPy](https://numpy.org/)
-* [Matplolib](https://matplotlib.org)
-* [Scipy](https://scipy.org)
-* [Pandas](https://pandas.pydata.org)
+## 🚀 Key Features
 
-To install all dependencies, run:
+- Real-time facial emotion detection (7 classes)
+- Pose-based action recognition (e.g., thinking, celebrating, hands raised)
+- Live webcam processing using Streamlit + OpenCV
+- Modular pipeline: detection → classification → action mapping
+- Supports both webcam and image input
+
+---
+
+## 🏗️ System Architecture
+
+Webcam/Input  
+→ Face Detection (Haar Cascade)  
+→ Preprocessing (48x48 grayscale)  
+→ CNN Model  
+→ Emotion Prediction  
+→ Pose Detection  
+→ Action Mapping  
+→ Output  
+
+---
+
+## 📊 Dataset
+
+- **FER-2013** → emotion classification  
+- **MPII Human Pose** → action understanding  
+- **EMOTIC dataset** → contextual emotion signals  
+
+---
+
+## ⚙️ Model
+
+- CNN-based architecture trained on FER-2013  
+- Input: 48×48 grayscale facial images  
+- Output: Probability distribution over 7 emotions  
+
+---
+
+## 🧪 Evaluation
+
+- Train/Test Split: 80/20  
+- Accuracy: ~63% (baseline CNN)  
+- Validated on real-time webcam inputs  
+
+---
+
+## 💡 Real-World Use Cases
+
+- Emotion-aware UI systems  
+- Surveillance and behavior monitoring  
+- Adaptive gaming and applications  
+- Human-computer interaction  
+
+---
+
+## ▶️ Run Locally
+
 ```bash
-pip install -r requirements.txt
-```
-
-## Run Locally on Windows
-
-Use a virtual environment so the project dependencies stay isolated:
-
-```bash
+git clone https://github.com/print-dc/emotify
 cd emotify
-python -m venv .venv
-.venv\Scripts\activate
-python -m pip install --upgrade pip
 pip install -r requirements.txt
-```
-
-To launch the deployable web app locally:
-
-```bash
 streamlit run app.py
-```
-
-Then open the local URL in your browser, click `START`, and allow camera access when prompted.
-
-To launch the older desktop OpenCV demo with the included `src/model.h5` file:
-
-```bash
-cd src
-python emotions.py --mode display
-```
-
-Press `q` to close the camera window.
-
-## Directory Structure
-```bash
-Emotify/
-│── .gitignore
-│── README.md
-│── requirements.txt
-│── imgs/
-│── src/
-│   │── data/  # Contains datasets (ignored in .gitignore)
-        │── test/
-        │── train/
-│   │── images/ # Contains image samples (ignored in .gitignore)
-│   │── emotions.py  # Emotion detection script
-│   │── action.py  # Action prediction script
-│   │── action_mapping.py
-│   │── actions.txt
-│   │── dataset_prepare.py  # Data preprocessing
-│   │── haarcascade_frontalface_default.xml  # Haar Cascade
-│   │── load_mpii.py 
-│   │── model.h5  # Pre-trained model weights
-│   │── mpii_annotations.csv
-│   │── mpii_human_pose_v1_u12_1.mat
-
-```
-## Basic Usage
-
-### Web App
-
-Run the Streamlit app:
-
-```bash
-streamlit run app.py
-```
-
-The deployed or local app can:
-
-- request browser camera permission
-- stream webcam frames over WebRTC
-- detect facial emotion live
-- estimate pose landmarks and infer actions in real time
-- fall back to image upload when webcam access is unavailable
 
 ### Desktop Script
 
